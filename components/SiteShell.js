@@ -26,6 +26,7 @@ export function SiteHeader() {
           <Link onClick={() => setOpen(false)} aria-current={pathname === "/" ? "page" : undefined} href="/">Home</Link>
           <Link onClick={() => setOpen(false)} aria-current={pathname === "/venue" ? "page" : undefined} href="/venue">The venue</Link>
           <Link onClick={() => setOpen(false)} aria-current={pathname === "/games" ? "page" : undefined} href="/games">Games</Link>
+          <Link onClick={() => setOpen(false)} aria-current={pathname === "/turfs" ? "page" : undefined} href="/turfs">Explore turfs</Link>
           <Link onClick={() => setOpen(false)} aria-current={pathname === "/contact" ? "page" : undefined} href="/contact">Contact</Link>
           <div className="nav-actions">
             <Link onClick={() => setOpen(false)} aria-current={pathname === "/account" ? "page" : undefined} className="button button-outline nav-account" href="/account">Sign in / Sign up</Link>
