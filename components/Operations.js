@@ -15,6 +15,8 @@ function MatchBooking({ booking, data, update, setError }) {
     try {
       const current = readData();
       const existing = current.bookings.find(item => item.id === booking.id);
+      if (current.matchSession?.bookingId === booking.id && !current.matchSession.endedAt) { setError("End the active pitch session before moving this booking."); return; }
+      if (existing?.matchFinished) { setError("A finished pitch session cannot be moved."); return; }
       if (!existing || existing.status !== "Confirmed" || isPast(date, newHour) || isUnavailable(current, date, newHour)) { setError("This booking or slot is no longer available."); return; }
       writeData({ ...current, bookings: current.bookings.map(item => item.id === booking.id ? { ...item, date, hour: newHour, price: priceFor(newHour, current.settings), checkedIn: false } : item) });
       setHour(""); setError("");
