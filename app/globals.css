@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
+.ui-icon{display:inline-block;width:1em;height:1em;flex:none;vertical-align:-.12em}
 :root{--paper:#f2e9dc;--white:#fcf8f1;--ink:#30251e;--muted:#7d7063;--lime:#dfb98b;--green:#795c46;--line:#dfd1c0}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}

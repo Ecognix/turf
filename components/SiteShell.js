@@ -1,5 +1,8 @@
 "use client";
 
+import Icon from "./Icon";
+
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -30,7 +33,7 @@ export function SiteHeader() {
           <Link onClick={() => setOpen(false)} aria-current={pathname === "/contact" ? "page" : undefined} href="/contact">Contact</Link>
           <div className="nav-actions">
             <Link onClick={() => setOpen(false)} aria-current={pathname === "/account" ? "page" : undefined} className="button button-outline nav-account" href="/account">Sign in / Sign up</Link>
-            <Link onClick={() => setOpen(false)} className="button button-dark nav-book" href="/book">Book a slot <span>↗</span></Link>
+            <Link onClick={() => setOpen(false)} className="button button-dark nav-book" href="/book">Book a slot <span><Icon name="arrow" /></span></Link>
           </div>
         </nav>
       </div>
@@ -42,9 +45,9 @@ export function SiteFooter() {
   return (
     <footer className="footer">
       <div className="wrap">
-        <div className="footer-top"><div><div className="eyebrow light">YOUR GAME STARTS HERE</div><h2>Good times.<br /><em>Great games.</em></h2></div><Link className="button button-lime" href="/book">Find your slot <span>↗</span></Link></div>
-        <div className="footer-grid"><div><Brand /><p>A little more play, right here in Dibrugarh.</p></div><div><span className="footer-label">EXPLORE</span><Link href="/venue">The venue</Link><Link href="/games">Games</Link><Link href="/book">Book a slot</Link><Link href="/contact">Contact</Link></div><div><span className="footer-label">FIND US</span><p>Dibrugarh, Assam<br />Exact location coming soon</p><Link href="/contact">Get in touch ↗</Link></div><div><span className="footer-label">FOLLOW THE GAME</span><p>Instagram coming soon. Follow along for match-day moments and community updates.</p><p>Venue details and pricing are subject to confirmation.</p></div></div>
-        <div className="footer-bottom"><span>© 2026 THE TURF DIBRUGARH</span><span>MADE FOR THE LOVE OF THE GAME ↗</span></div>
+        <div className="footer-top"><div><div className="eyebrow light">YOUR GAME STARTS HERE</div><h2>Good times.<br /><em>Great games.</em></h2></div><Link className="button button-lime" href="/book">Find your slot <span><Icon name="arrow" /></span></Link></div>
+        <div className="footer-grid"><div><Brand /><p>A little more play, right here in Dibrugarh.</p></div><div><span className="footer-label">EXPLORE</span><Link href="/venue">The venue</Link><Link href="/games">Games</Link><Link href="/book">Book a slot</Link><Link href="/contact">Contact</Link></div><div><span className="footer-label">FIND US</span><p>Dibrugarh, Assam<br />Exact location coming soon</p><Link href="/contact">Get in touch <Icon name="arrow" /></Link></div><div><span className="footer-label">FOLLOW THE GAME</span><p>Instagram coming soon. Follow along for match-day moments and community updates.</p><p>Venue details and pricing are subject to confirmation.</p></div></div>
+        <div className="footer-bottom"><span>© 2026 THE TURF DIBRUGARH</span><span>MADE FOR THE LOVE OF THE GAME <Icon name="arrow" /></span></div>
       </div>
     </footer>
   );

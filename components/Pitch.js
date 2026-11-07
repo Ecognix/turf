@@ -1,3 +1,4 @@
+import Icon from "./Icon";
 export default function Pitch() {
   return (
     <div className="pitch-scene" aria-label="Illustration of a football turf">
@@ -8,7 +9,7 @@ export default function Pitch() {
         <span className="player player-one" /><span className="player player-two" /><span className="player player-three" /><span className="player player-four" /><span className="ball" />
       </div>
       <div className="pitch-tag tag-top"><span className="live-dot" /> THE GAME IS ON</div>
-      <div className="pitch-tag tag-bottom"><span>✳</span><div>MADE FOR<br /><strong>GOOD GAMES</strong></div></div>
+      <div className="pitch-tag tag-bottom"><span><Icon name="star" /></span><div>MADE FOR<br /><strong>GOOD GAMES</strong></div></div>
       <span className="scene-caption">A LITTLE FIELD. A LOT OF GAME.</span>
     </div>
   );
