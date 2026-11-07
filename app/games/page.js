@@ -1,0 +1,10 @@
+import Link from "next/link";
+
+const games = [
+  { number: "01", name: "Football", tag: "THE BEAUTIFUL GAME", image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=1000&q=80", text: "Quick passes, close finishes and the kind of game you talk about long after the final whistle. Perfect for friendly small-sided matches." },
+  { number: "02", name: "Training", tag: "PUT IN THE WORK", image: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=1000&q=80", text: "From first touches to fitness drills, bring your team together for a session that makes the next match even better." },
+  { number: "03", name: "Casual play", tag: "YOUR GAME, YOUR RULES", image: "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=1000&q=80", text: "A laid-back kickabout, a friendly challenge or a celebration with your crew. Make the space your own." },
+];
+export default function Games() {
+  return <><section className="inner-hero wrap"><div className="eyebrow"><span className="square" /> FIND YOUR KIND OF GAME</div><h1>One pitch.<br /><em>So many ways to play.</em></h1><p>Whatever brings you to the field, there is always room for a good game.</p><Link className="button button-dark" href="/book">Find a time <span>↗</span></Link></section><section className="section wrap games-grid">{games.map(game => <article className="game-card" key={game.name}><div className="game-image" style={{ backgroundImage: `linear-gradient(0deg, #17251c66, transparent), url("${game.image}")` }}><span>{game.number} / {game.tag}</span></div><div className="game-body"><h2>{game.name}</h2><p>{game.text}</p><Link className="text-link" href="/book">Book the pitch <span>↗</span></Link></div></article>)}</section><section className="wrap game-callout"><span>✳</span><div><h2>Got something else in mind?</h2><p>For tournaments, private events or other activities, get in touch. Supported activities and equipment are subject to venue confirmation.</p></div><Link href="/contact" className="button button-dark">Talk to us ↗</Link></section><div className="section" /></>;
+}
