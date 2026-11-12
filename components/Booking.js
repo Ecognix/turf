@@ -16,7 +16,11 @@ export default function Booking() {
   const [confirmed, setConfirmed] = useState(null);
   const [error, setError] = useState("");
   useEffect(() => {
-    setDate(todayString());
+    const params = new URLSearchParams(window.location.search);
+    const wanted = params.get("date");
+    setDate(wanted && wanted >= todayString() && wanted <= addDays(todayString(), 30) ? wanted : todayString());
+    const occasion = params.get("occasion");
+    if (occasion) setDetails(previous => ({ ...previous, occasion }));
     const refresh = () => { try { const stored = readData(); setData(stored); setError(""); } catch { setError("Could not read local data. Check your browser storage settings."); } };
     refresh();
     try { const stored = readData(); const profile = stored.profiles.find(p => p.email === stored.currentProfile); if (profile) setDetails(previous => ({ ...previous, name: profile.name, email: profile.email })); } catch { setError("Could not read your local profile."); }
@@ -45,7 +49,7 @@ export default function Booking() {
     <div className="page-heading"><div><div className="eyebrow"><span className="square" /> YOUR NEXT GAME AWAITS</div><h1>Let's get you <em>playing.</em></h1><p>Pick your moment. We'll save you a place on the pitch.</p></div><div className="demo-pill"><span className="live-dot" /> BOOKING PREVIEW</div></div>
     <div className="notice"><strong>Booking preview.</strong> Slots, rates and details are illustrative. Bookings are saved only in this browser; no payment is taken and no real reservation is made.</div>
     {error && <div className="error" role="alert">{error}</div>}
-    {confirmed && <div className="success" role="status"><div><strong>You're on the team, {confirmed.name}!</strong><p>Booking {confirmed.id} · {prettyDate(confirmed.date)} · {timeLabel(confirmed.hour)}–{timeLabel(confirmed.hour + 1)}. No real reservation has been made.</p></div><button onClick={() => setConfirmed(null)} aria-label="Dismiss confirmation">✕</button></div>}
+    {confirmed && <div className="success" role="status"><div><strong>You're on the team, {confirmed.name}!</strong><p>Booking {confirmed.id} · {prettyDate(confirmed.date)} · {timeLabel(confirmed.hour)}–{timeLabel(confirmed.hour + 1)}. No real reservation has been made.</p></div><button onClick={() => setConfirmed(null)} aria-label="Dismiss confirmation"><Icon name="close" /></button></div>}
     <div className="booking-grid"><div className="booking-main">
       <div className="booking-card"><div className="card-heading"><div><span className="step-number">01</span><h2>Pick your day</h2><p>Good games are always worth making time for.</p></div><label className="date-picker">CHOOSE DATE<input type="date" min={date ? todayString() : undefined} max={date ? addDays(todayString(), 30) : undefined} value={date} onChange={e => chooseDate(e.target.value)} /></label></div><div className="date-strip">{date && Array.from({ length: 7 }, (_, i) => addDays(todayString(), i)).map(d => <button key={d} onClick={() => chooseDate(d)} className={date === d ? "date-tile selected" : "date-tile"}><span>{prettyDate(d, { weekday: "short" })}</span><strong>{new Date(`${d}T12:00:00`).getDate()}</strong><small>{prettyDate(d, { month: "short" })}</small></button>)}</div></div>
       <div className="booking-card"><div className="card-heading"><div><span className="step-number">02</span><h2>Choose your time</h2><p>{date ? prettyDate(date, { weekday: "long", day: "numeric", month: "long" }) : "Loading dates…"} · 1 hour per slot</p></div><div className="legend"><span /> Available <i /> Unavailable</div></div><div className="slots">{slots.map(h => { const unavailable = !data || !date || isPast(date, h) || isUnavailable(data, date, h); return <button type="button" disabled={unavailable} onClick={() => { setHour(h); setError(""); }} className={hour === h ? "slot selected" : "slot"} key={h}><strong>{timeLabel(h)}</strong><small>{unavailable ? "Unavailable" : money(priceFor(h, data?.settings))}</small></button>; })}</div><p className="fine-print">Indicative rates: {money(data?.settings.dayRate ?? 1200)}/hour before 5 PM · {money(data?.settings.eveningRate ?? 1500)}/hour from 5 PM. Subject to change.</p></div>

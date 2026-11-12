@@ -1,5 +1,6 @@
 import "./globals.css";
 import { SiteHeader, SiteFooter } from "../components/SiteShell";
+import Assistant from "../components/Assistant";
 
 export const metadata = {
   title: "THE TURF | Dibrugarh's place to play",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />
+        <Assistant />
       </body>
     </html>
   );
